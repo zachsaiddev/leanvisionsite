@@ -355,6 +355,7 @@
             padding: 8px 20px;
             background: var(--primary);
             color: #fff;
+            text-decoration: none;
             font-family: var(--body);
             font-size: 13px;
             font-weight: 600;
@@ -510,17 +511,17 @@
     <!-- Download Bar -->
     <div class="download-bar">
         <p>Save this page as a PDF</p>
-        <button class="download-btn" onclick="downloadPDF()">
+        <a href="../LeanVision.pdf" download class="download-btn">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
             Download PDF
-        </button>
+        </a>
     </div>
     <div class="download-spacer"></div>
 
     <!-- Header -->
     <div class="header">
         <div class="logo">
-            <img src="logo.png" alt="LV">
+            <img src="../logo.png" alt="LV">
             <span class="logo-text">Lean Vision<span class="logo-sub">Limited</span></span>
         </div>
         <span class="header-url">www.leanvision.co.uk</span>
@@ -743,7 +744,7 @@
     <div class="about-strip">
         <div class="about-inner">
             <div class="about-photo">
-                <img src="khalid.jpg" alt="Khalid Said">
+                <img src="../khalid.jpg" alt="Khalid Said">
             </div>
             <div class="about-text">
                 <h3>Khalid Said</h3>
@@ -764,7 +765,7 @@
             </div>
             <div class="cta-right">
                 <div class="logo">
-                    <img src="logo.png" alt="LV">
+                    <img src="../logo.png" alt="LV">
                     <span class="logo-text">Lean Vision<span class="logo-sub">Limited</span></span>
                 </div>
                 <p class="cta-address">Suite I Business Development Centre, Stafford Park 4,<br>Telford, Shropshire, United Kingdom, TF3 3BA</p>
@@ -773,29 +774,5 @@
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
-    <script>
-        function downloadPDF() {
-            const bar = document.querySelector('.download-bar');
-            const spacer = document.querySelector('.download-spacer');
-            bar.style.display = 'none';
-            spacer.style.display = 'none';
-
-            const element = document.body;
-            const opt = {
-                margin: 0,
-                filename: 'Lean-Vision-Flyer.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-                pagebreak: { mode: ['css', 'legacy'], before: '.page-break' }
-            };
-
-            html2pdf().set(opt).from(element).save().then(() => {
-                bar.style.display = '';
-                spacer.style.display = '';
-            });
-        }
-    </script>
 </body>
 </html>

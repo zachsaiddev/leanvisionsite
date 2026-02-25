@@ -96,8 +96,43 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Contact Form ---
     const contactForm = document.getElementById('contactForm');
 
+    const blockedEmailDomains = [
+        'gmail.com', 'googlemail.com', 'yahoo.com', 'yahoo.co.uk', 'yahoo.fr',
+        'yahoo.de', 'yahoo.it', 'yahoo.es', 'yahoo.ca', 'yahoo.com.au',
+        'hotmail.com', 'hotmail.co.uk', 'hotmail.fr', 'hotmail.de',
+        'outlook.com', 'outlook.co.uk', 'live.com', 'live.co.uk', 'msn.com',
+        'aol.com', 'icloud.com', 'me.com', 'mac.com',
+        'mail.com', 'email.com', 'protonmail.com', 'proton.me',
+        'zoho.com', 'yandex.com', 'gmx.com', 'gmx.co.uk',
+        'fastmail.com', 'tutanota.com', 'tuta.io',
+        'hey.com', 'pm.me', 'inbox.com', 'mail.ru',
+        'btinternet.com', 'sky.com', 'virginmedia.com', 'talktalk.net',
+        'ntlworld.com', 'blueyonder.co.uk'
+    ];
+
+    function isPersonalEmail(email) {
+        const domain = email.split('@')[1]?.toLowerCase();
+        return !domain || blockedEmailDomains.includes(domain);
+    }
+
+    const emailInput = document.getElementById('email');
+    const emailError = document.getElementById('emailError');
+
+    emailInput.addEventListener('input', () => {
+        emailError.style.display = 'none';
+        emailInput.classList.remove('input-error');
+    });
+
     contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
+
+        const email = emailInput.value.trim();
+        if (isPersonalEmail(email)) {
+            emailError.style.display = 'block';
+            emailInput.classList.add('input-error');
+            emailInput.focus();
+            return;
+        }
 
         const btn = contactForm.querySelector('button[type="submit"]');
         const originalText = btn.textContent;

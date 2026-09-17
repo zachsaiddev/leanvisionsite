@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navLinks.classList.toggle('open');
         header.classList.toggle('menu-open');
         document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+        mobileToggle.setAttribute('aria-expanded', navLinks.classList.contains('open'));
     });
 
     // Close mobile menu on link click
@@ -37,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             navLinks.classList.remove('open');
             header.classList.remove('menu-open');
             document.body.style.overflow = '';
+            mobileToggle.setAttribute('aria-expanded', 'false');
         });
     });
 
@@ -64,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Scroll Reveal ---
     const revealElements = document.querySelectorAll(
-        '.about-card, .service-card, .approach-card, .industry-tag, .contact-detail'
+        '.about-card-proof, .service-card, .approach-card, .industry-tag, .contact-detail'
     );
 
     revealElements.forEach(el => el.classList.add('reveal'));
@@ -149,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             btn.textContent = 'Message Sent!';
-            btn.style.background = 'var(--color-primary)';
+            btn.style.background = 'var(--teal)';
             btn.style.color = '#fff';
             contactForm.reset();
 
@@ -162,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => {
             btn.textContent = 'Error - Try Again';
-            btn.style.background = '#ef4444';
+            btn.style.background = '#C62F2F';
             btn.disabled = false;
 
             setTimeout(() => {
@@ -182,9 +184,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const elementPosition = target.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.scrollY - headerOffset;
 
+                const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
                 window.scrollTo({
                     top: offsetPosition,
-                    behavior: 'smooth'
+                    behavior: prefersReduced ? 'auto' : 'smooth'
                 });
             }
         });
